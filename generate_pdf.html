@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- htlm to pdf library start -->
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <!-- html to pdf library end
+     -->
+    <style>
+       body{
+            box-sizing: border-box;
+            margin:0;
+            padding: 0;
+     }
+     .bg{
+            
+    background-position-y: -32%;
+    width: 100%;
+    background-image: url(header.jpg);
+    background-repeat: no-repeat;
+}
+.tax-invoice-heading{
+    margin-top: 45px;
+}
+
+.h3, h3 {
+   font-size: 22px;
+    font-weight: 600;
+    background: #e6e60333;
+    padding: 5px;
+    display: inline-block;
+}
+         
+         .tax-invoice-address ul{
+             list-style: none;
+             padding: 0;
+         }
+         .tax-invoice-address ul {
+             list-style: none;
+             padding: 0;
+         }
+         .invoice-date ul {
+             list-style: none;
+             padding: 0;
+         }
+         .invoice-date ul li:nth-child(odd){
+             font-weight: bold;
+         }
+         .invoice-date ul li:nth-child(even){
+            margin-bottom: 6px;
+         }
+         .tax-invoice-address{
+            margin-left: 10px;
+            margin-top: 20px;
+         }
+         .tax-half{
+             margin-top: 10px;
+         }
+         .tax-table{
+             margin-top: 30px;
+         }
+         .subtottal{
+             text-align: right;
+             border-bottom: hidden;
+            
+         }
+         .totalAmount{
+             text-align: left;
+         }
+         thead tr{
+             
+             background: #eaca34;
+         }
+
+         .tax-descriptions{
+             width: 400px;
+             list-style: none;
+             line-height: 1.5;
+             padding: 0;
+         }
+         /* .subtolta-placement{
+             padding: 60px;
+         }
+         */
+         .right{
+             text-align: left;
+         } 
+         .due-date{
+             margin-top: 20px;
+         }
+         .due-date-address{
+             margin-top: 10px;
+         }
+         .due-date-address ul{
+             list-style: none;
+             line-height: 1.4;
+             padding: 0;
+         }
+         .dash-line{
+             margin-top: 10px;
+             border: 1px dashed black;
+         }
+        
+         .logo{
+             position:relative;
+             top:5%;
+             left : 2%;
+         }
+         .imgg{
+             position: relative;
+             top: 50px;
+
+         }
+       
+        .total{
+            background: #c8ffc8;
+        }
+         
+         
+.generate{
+    margin: 20px 0px;
+}
+.summary_invoice{
+    list-style: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0;
+}
+   .summary_invoice_redult{
+    list-style: none;
+   padding: 0;
+    font-size: 14px; 
+   } 
+    </style>
+</head>
+
+<body>
+
+    <div class="text-center generate">
+        <button type="button" class="btn btn-success btn-lg p-2" id="doenload_pdf">Generate Invoice</button>
+    </div>
+ 
+    <div class="container-fluid  bg" id="invoice">
+        <!-- logo start -->
+            <!-- logo start -->
+            <div class="text-left logo">
+                <img class="imgg" src="http://invoice.saisolar.com.au/logo.png" alt="logo" width="160px">
+               </div>
+        <!-- tax header start -->
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="tax-invoice-heading">
+                  
+                        <h3>TAX INVOICE</h3>
+                    
+                </div>
+                <div class="tax-invoice-address">
+                    <ul>
+                        <li class="c_name">Gordon Seeley</li>
+                        <li class="c_address_1">32 Carnation Ave</li>
+                        <li class="c_address_2">CLAREMONT MEADROW NEW 2727</li>
+                        <li class="c_address_3">austrelia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row tax-half">
+                    <div class="col-sm-5">
+                        <div class="invoice-date">
+                            <ul>
+                                <li>Invoice Date</li>
+                                <li class="invo_date">07 jun 2021</li>
+                                <li>Invoice Number</li>
+                                <li class="invo_number">INV-1022</li>
+                                <li>Reference</li>
+                                <li class="invo_reffrence">Gordon seeley</li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="tax-invoice-address">
+                            <ul>
+                                <li>Sai Business PTY Ltd</li>
+                                <li>162 Alex Ave</li>
+                                <li>SCHOFIELDS NSW 2762</li>
+                                <li>AUSTRALIA</li>
+                                <li>ABN : <span class="invo_abn">1234566</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- taxt-header end -->
+    
+        <!-- tax table start -->
+        <table class="table tax-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Amount AUD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ul class="tax-descriptions">
+                            <li class="product_1">Install html2pdf.js and its dependencies using NPM with npm install
+                                --save html2pdf.js
+                                (make sure to include .js in the package name).Note:</li>
+                            <li class="product_2"> Install html2pdf.js and its dependencies using NPM with npm install
+                                --save html2pdf.js
+                                (make sure to include .js in the package name).Note:</li>
+                            <li class="product_3">Install html2pdf.js and its dependencies using NPM with npm install
+                                --save html2pdf.js
+                                (make sure to include .js in the package name).Note:</li>
+                        </ul>
+                    </td>
+                    <td class="invo_quantity">1</td>
+                    <td class="invo_unit_price">3627.67</td>
+                    <td class="total_amount_of_invoice">3227</td>
+                </tr>
+                <tr class="subtottal">
+                    <td colspan="4" class="subtolta-placement">subtotal</td>
+                    <td colspan="1" class="right " id="subtotal"> 3245</td>
+                </tr>
+                <tr class="subtottal total-gst">
+                    <td colspan="4">GST Included</td>
+                    <td colspan="1" class="right gst_add">324</td>
+                </tr>
+                <tr class="subtottal ">
+                    <td colspan="4" style="font-weight: bold;"> Total AUD</td>
+                    <td colspan="1" class="right total_amount_of_invoice bg-success" style="font-weight: bold;">39990.00</td>
+        
+                </tr>
+            </tbody>
+        </table>
+        <!-- tax table end -->
+    
+        <!-- due date block start -->
+        <div class="due-date">
+            <div class="due-date-heading">
+                <h3>Due Date: <span class="due_date"></span></h3>
+                <div class="due-date-content">
+                    <p>Please make payment in the bank details below</p>
+                </div>
+                <div class="due-date-address">
+                    <ul>
+                        <li>Sai Business PTY Ltd</li>
+                        <li>Commonwealth Bank</li>
+                        <li>BSB: 062703 </li>
+                        <li>Account number: 10646616</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- due date plock end -->
+        <hr class="dash-line" />
+        <!-- payment-advise start -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="tax-invoice-heading">
+                    
+                        <h3>PAYMENT ADVICE</h3>
+                    
+                </div>
+                <div class="tax-invoice-address">
+    
+                    <ul>
+                        <li>Sai Business PTY Ltd</li>
+                        <li>162 Alex Ave</li>
+                        <li>SCHOFIELDS NSW 2762</li>
+                        <li>AUSTRALIA</li>
+                        <li>ABN : <span class="invo_abn">1234566</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row tax-half">
+                    <div class="row">
+                        <div class="col-sm-6 text-right">
+                            <ul class="summary_invoice">
+                                <li>Customer</li>
+                                <li>Invoice Number</li>
+                                <li>Amount Due</li>
+                                <li>Due Date</li>
+                           
+                                <li>Amount Enclosed</li>
+                            </ul>
+                        </div>
+                   
+
+                        <div class="col-sm-6">
+                            <ul class="summary_invoice_redult">
+                                <li class="c_name">Customer</li>
+                                <li class="invo_number">Invoice Number</li>
+                                <li class="total_amount_of_invoice">Amount Due</li>
+                                <li class="due_date">23</li>
+                            <li></li>
+                            </ul>
+                        </div>
+                       
+                      </div>
+    
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+</body>
+<script>
+    $(document).ready(function () {
+
+            $('.c_name').html(localStorage.getItem("c_name"));
+            $('.c_address_1').html(localStorage.getItem("c_address_1"));
+            $('.c_address_2').html(localStorage.getItem("c_address_2"));
+            $('.c_address_3').html(localStorage.getItem("c_address_3"))
+            $('.invo_date').html(localStorage.getItem("invo_date"));
+            $('.invo_number').html(localStorage.getItem("invo_number"));
+            $('.invo_reffrence').html(localStorage.getItem("invo_reffrence"));
+            $('.invo_abn').html(localStorage.getItem("invo_abn"));
+            $(".product_1").html(localStorage.getItem("product_1"));
+            $(".product_2").html(localStorage.getItem("product_2"));
+            $(".product_3").html(localStorage.getItem("product_3"));
+            $('.invo_quantity').html(localStorage.getItem("invo_quantity"));
+            $('.invo_unit_price').html(localStorage.getItem("invo_unit_price"));
+            $('.gst_persrntage').html(localStorage.getItem("gst_persrntage") + "%");
+            $('.invo_aud_amounr').html(localStorage.getItem("invo_aud_amounr"));
+            $('.gst_add').html(localStorage.getItem("gst_add"));
+            $(".total_amount_of_invoice").html(localStorage.getItem("total_amount_of_invoice"));
+            $(".due_date").html(localStorage.getItem("due_date"));
+            $('#subtotal').html(localStorage.getItem("subtotal"));
+            $("#doenload_pdf").click(function(){
+            const element = document.getElementById('invoice');
+    
+            html2pdf().from(element).save();
+            // localStorage.removeItem('c_name');
+            // localStorage.removeItem('c_address_1');
+            // localStorage.removeItem('c_address_2');
+            // localStorage.removeItem('c_address_3');
+            // localStorage.removeItem('invo_date');
+            // localStorage.removeItem('invo_number');
+            // localStorage.removeItem('invo_reffrence');
+            // localStorage.removeItem('invo_abn');
+            // localStorage.removeItem('product_1');
+            // localStorage.removeItem('product_2');
+            // localStorage.removeItem('product_3');
+            // localStorage.removeItem('invo_quantity');
+            // localStorage.removeItem('invo_unit_price');
+            // localStorage.removeItem('gst_persrntage');
+            // localStorage.removeItem('invo_aud_amounr');
+            // localStorage.removeItem('total_amount_of_invoice');
+            // localStorage.removeItem('due_date');
+
+
+            });
+          
+            
+
+    });
+    //pdf generate logic end
+</script>
+</html>
